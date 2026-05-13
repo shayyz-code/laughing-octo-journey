@@ -1,21 +1,25 @@
 # Laughing Octo Journey 🐙
 
-Welcome to the **Laughing Octo Journey**, a whimsical 2D graphical adventure game written in C using the **Raylib** library.
+Welcome to the **Laughing Octo Journey**, a high-fidelity 2D graphical adventure game written in C using the **Raylib** library.
 
-In this game, you take on the role of a happy-go-lucky octopus exploring the wonders of the ocean floor. Navigate through different ocean zones, collect treasures, and keep your "Laughter Level" high!
+In this game, you take on the role of a happy-go-lucky octopus exploring a living, breathing ocean floor. Navigate through distinct biomes, collect bioluminescent treasures, and keep your "Jolly Meter" high!
 
-## Features
+## High-Fidelity Features
 
-- **2D Graphical Interface:** A colorful underwater world powered by Raylib.
-- **Animated Octopus:** Your octopus friend bobs and giggles as you explore.
-- **Heads-Up Display (HUD):** Real-time tracking of your current location, description, and "Jolly Meter" (Laughter Level).
-- **Professional Structure:** Organized C project layout with clear separation of headers and source files.
+- **Underwater Shaders:** Real-time GLSL fragment shaders create a dynamic ripple distortion effect for an immersive water feel.
+- **Living Ocean (Particle System):** Rising air bubbles and drifting "marine snow" particles give the water volume and life.
+- **Frame-Based Animation:** A custom animation system gives the octopus fluid tentacle movement as it swims.
+- **Bioluminescence:** The octopus and hidden treasures emit a soft, atmospheric glow, especially vital in the dark depths of the Abyss.
+- **Spatial Exploration:** Seamlessly swim across the screen and transition between areas by touching the edges.
+- **Professional Architecture:** Modular C code with a dedicated post-processing pipeline and shader management.
 
 ## Controls
 
-- **Movement:** Use `Arrow Keys` or `WASD` to swim between locations.
-- **Giggle:** Press `L` to let out a bubbly octopus giggle and boost your happiness.
-- **Exit:** Close the window or press `ESC` to end your journey.
+- **Movement:** Hold `Arrow Keys` or `WASD` to swim freely.
+- **Transition:** Touch the screen edges to enter a new ocean zone.
+- **Take Item:** Press `T` to pick up a treasure you've found.
+- **Giggle:** Press `L` to let out a bubbly octopus giggle and boost your "Jolly Meter".
+- **Exit:** Press `ESC` or close the window.
 
 ## Building and Running
 
@@ -44,8 +48,10 @@ In this game, you take on the role of a happy-go-lucky octopus exploring the won
 
 ## Project Structure
 
-- `include/`: Header files (`game.h`, `world.h`, `player.h`).
-- `src/`: Source code logic (`main.c`, `world.c`, `player.c`).
+- `include/`: Header files for game logic, world building, and particles.
+- `src/`: Core implementation files.
+- `shaders/`: GLSL fragment shaders for post-processing effects.
 - `bin/`: The final compiled executable.
-- `obj/`: Temporary object files during compilation.
-- `Makefile`: Build configuration for Raylib and standard frameworks.
+- `obj/`: Compiled object files.
+- `Makefile`: Optimized build configuration for Raylib and framework linking.
+-
