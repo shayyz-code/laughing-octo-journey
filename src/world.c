@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "world.h"
+#include "../include/world.h"
 
 Location* create_location(const char* name, const char* desc) {
     Location* loc = malloc(sizeof(Location));

@@ -1,5 +1,6 @@
 # Binaries
 octo-adventure
+obj
 *.o
 
 # Debug symbols
