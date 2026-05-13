@@ -6,7 +6,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+SRCS = src/main.c src/world.c src/player.c src/particles.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 $(TARGET): $(OBJS) | $(BIN_DIR)

@@ -8,6 +8,10 @@ void init_player(Player* player, Location* start_location) {
     player->inventory_count = 0;
     player->laughter_level = 50; // Neutral laughter
     player->sprite = (Texture2D){ 0 };
+    player->currentFrame = 0;
+    player->frameCount = 4;
+    player->frameTimer = 0.0f;
+    player->frameSpeed = 8.0f; // Frames per second
 }
 
 void move_player(Player* player, char direction) {

@@ -32,6 +32,10 @@ typedef struct {
     int inventory_count;
     int laughter_level;
     Texture2D sprite;
+    int currentFrame;
+    int frameCount;
+    float frameTimer;
+    float frameSpeed;
 } Player;
 
 #endif
