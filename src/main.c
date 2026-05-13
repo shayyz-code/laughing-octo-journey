@@ -16,6 +16,18 @@ int main() {
     Player player;
     init_player(&player, start);
 
+    // Create procedural Octopus Sprite
+    Image octoImage = GenImageColor(80, 80, BLANK);
+    ImageDrawCircle(&octoImage, 40, 40, 35, PINK);
+    ImageDrawCircle(&octoImage, 25, 30, 5, BLACK);
+    ImageDrawCircle(&octoImage, 55, 30, 5, BLACK);
+    // Draw some "tentacles"
+    for (int i = 0; i < 8; i++) {
+        ImageDrawCircle(&octoImage, 15 + i*7, 65, 8, PINK);
+    }
+    player.sprite = LoadTextureFromImage(octoImage);
+    UnloadImage(octoImage);
+
     SetTargetFPS(60);
 
     Vector2 octoPos = {(float)screenWidth / 2, (float)screenHeight / 2};
@@ -80,7 +92,11 @@ int main() {
         // Draw
         BeginDrawing();
 
-            ClearBackground(player.current_location->bgColor); // Location-specific color
+            if (player.current_location->background.id != 0) {
+                DrawTexture(player.current_location->background, 0, 0, WHITE);
+            } else {
+                ClearBackground(player.current_location->bgColor); // Location-specific color
+            }
 
             // Simple procedural background elements
             if (strcmp(player.current_location->name, "Coral Reef") == 0) {
@@ -121,10 +137,9 @@ int main() {
             DrawText("Hold Arrows/WASD to swim. Touch edges to change locations.", screenWidth - 450, screenHeight - 40, 15, WHITE);
             DrawText("'L' to laugh, 'T' to take", screenWidth - 250, screenHeight - 20, 12, LIGHTGRAY);
 
-            // Draw the Octopus (Placeholder: A cute pink circle with eyes)
-            DrawCircleV((Vector2){octoPos.x, octoPos.y + bobbingAmount}, 40, PINK);
-            DrawCircle(octoPos.x - 15, octoPos.y + bobbingAmount - 10, 5, BLACK); // Left eye
-            DrawCircle(octoPos.x + 15, octoPos.y + bobbingAmount - 10, 5, BLACK); // Right eye
+            // Draw the Octopus (Using the new procedural sprite)
+            Vector2 drawPos = {octoPos.x - 40, octoPos.y + bobbingAmount - 40};
+            DrawTextureV(player.sprite, drawPos, WHITE);
             DrawText("🐙", octoPos.x - 20, octoPos.y + bobbingAmount - 20, 40, WHITE);
 
         EndDrawing();

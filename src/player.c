@@ -7,6 +7,7 @@ void init_player(Player* player, Location* start_location) {
     player->current_location = start_location;
     player->inventory_count = 0;
     player->laughter_level = 50; // Neutral laughter
+    player->sprite = (Texture2D){ 0 };
 }
 
 void move_player(Player* player, char direction) {

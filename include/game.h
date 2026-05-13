@@ -17,6 +17,7 @@ typedef struct Location {
     char name[MAX_NAME];
     char description[MAX_DESC];
     Color bgColor;
+    Texture2D background;
     struct Location *north;
     struct Location *south;
     struct Location *east;
@@ -30,6 +31,7 @@ typedef struct {
     Item *inventory[MAX_ITEMS];
     int inventory_count;
     int laughter_level;
+    Texture2D sprite;
 } Player;
 
 #endif

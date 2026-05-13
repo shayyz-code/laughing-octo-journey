@@ -7,6 +7,7 @@ Location* create_location(const char* name, const char* desc, Color color) {
     strncpy(loc->name, name, MAX_NAME);
     strncpy(loc->description, desc, MAX_DESC);
     loc->bgColor = color;
+    loc->background = (Texture2D){ 0 };
     loc->north = loc->south = loc->east = loc->west = NULL;
     loc->item_count = 0;
     return loc;
