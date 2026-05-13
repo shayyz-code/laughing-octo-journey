@@ -2,10 +2,11 @@
 #include <string.h>
 #include "../include/world.h"
 
-Location* create_location(const char* name, const char* desc) {
+Location* create_location(const char* name, const char* desc, Color color) {
     Location* loc = malloc(sizeof(Location));
     strncpy(loc->name, name, MAX_NAME);
     strncpy(loc->description, desc, MAX_DESC);
+    loc->bgColor = color;
     loc->north = loc->south = loc->east = loc->west = NULL;
     loc->item_count = 0;
     return loc;
@@ -19,10 +20,10 @@ Item* create_item(const char* name, const char* desc) {
 }
 
 Location* init_world() {
-    Location* reef = create_location("Coral Reef", "A vibrant reef full of colorful fish and swaying anemones.");
-    Location* cave = create_location("Dark Cave", "A mysterious, bioluminescent cave with strange echoes.");
-    Location* ship = create_location("Sunken Shipwreck", "An ancient wooden ship resting on the sandy floor.");
-    Location* abyss = create_location("The Abyss", "A deep, dark trench where the pressure is immense.");
+    Location* reef = create_location("Coral Reef", "A vibrant reef full of colorful fish and swaying anemones.", SKYBLUE);
+    Location* cave = create_location("Dark Cave", "A mysterious, bioluminescent cave with strange echoes.", DARKBLUE);
+    Location* ship = create_location("Sunken Shipwreck", "An ancient wooden ship resting on the sandy floor.", BLUE);
+    Location* abyss = create_location("The Abyss", "A deep, dark trench where the pressure is immense.", BLACK);
 
     // Add items
     reef->items[reef->item_count++] = create_item("Shiny Pearl", "A perfectly round, lustrous pearl.");

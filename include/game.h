@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <stdbool.h>
+#include "raylib.h"
 
 #define MAX_ITEMS 10
 #define MAX_DESC 256
@@ -15,6 +16,7 @@ typedef struct {
 typedef struct Location {
     char name[MAX_NAME];
     char description[MAX_DESC];
+    Color bgColor;
     struct Location *north;
     struct Location *south;
     struct Location *east;
