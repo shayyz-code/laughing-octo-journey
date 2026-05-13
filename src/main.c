@@ -21,22 +21,55 @@ int main() {
     Vector2 octoPos = {(float)screenWidth / 2, (float)screenHeight / 2};
     float bobbingAmount = 0;
     float timer = 0;
+    float moveSpeed = 300.0f;
 
     // Main game loop
     while (!WindowShouldClose()) {
         // Update
-        timer += GetFrameTime();
+        float dt = GetFrameTime();
+        timer += dt;
         bobbingAmount = sinf(timer * 2.0f) * 10.0f; // Bobbing animation
 
-        if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-            move_player(&player, 'n');
-        } else if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-            move_player(&player, 's');
-        } else if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
-            move_player(&player, 'e');
-        } else if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
-            move_player(&player, 'w');
-        } else if (IsKeyPressed(KEY_L)) {
+        // Continuous Movement
+        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) octoPos.y -= moveSpeed * dt;
+        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) octoPos.y += moveSpeed * dt;
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) octoPos.x -= moveSpeed * dt;
+        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) octoPos.x += moveSpeed * dt;
+
+        // Edge Detection and Room Transitions
+        if (octoPos.x < 0) {
+            if (player.current_location->west) {
+                move_player(&player, 'w');
+                octoPos.x = screenWidth - 5;
+            } else {
+                octoPos.x = 0;
+            }
+        } else if (octoPos.x > screenWidth) {
+            if (player.current_location->east) {
+                move_player(&player, 'e');
+                octoPos.x = 5;
+            } else {
+                octoPos.x = screenWidth;
+            }
+        }
+
+        if (octoPos.y < 110) { // Offset for the HUD area
+            if (player.current_location->north) {
+                move_player(&player, 'n');
+                octoPos.y = screenHeight - 45;
+            } else {
+                octoPos.y = 110;
+            }
+        } else if (octoPos.y > screenHeight - 40) { // Offset for the status area
+            if (player.current_location->south) {
+                move_player(&player, 's');
+                octoPos.y = 115;
+            } else {
+                octoPos.y = screenHeight - 40;
+            }
+        }
+
+        if (IsKeyPressed(KEY_L)) {
             laugh(&player);
         } else if (IsKeyPressed(KEY_T)) {
             if (player.current_location->item_count > 0) {
@@ -85,7 +118,8 @@ int main() {
             DrawText(invText, 200, screenHeight - 40, 20, YELLOW);
 
             // Draw instructions
-            DrawText("Arrows/WASD to move, 'L' to laugh, 'T' to take", screenWidth - 380, screenHeight - 40, 15, WHITE);
+            DrawText("Hold Arrows/WASD to swim. Touch edges to change locations.", screenWidth - 450, screenHeight - 40, 15, WHITE);
+            DrawText("'L' to laugh, 'T' to take", screenWidth - 250, screenHeight - 20, 12, LIGHTGRAY);
 
             // Draw the Octopus (Placeholder: A cute pink circle with eyes)
             DrawCircleV((Vector2){octoPos.x, octoPos.y + bobbingAmount}, 40, PINK);
