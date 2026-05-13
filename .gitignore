@@ -1,0 +1,9 @@
+# Binaries
+octo-adventure
+*.o
+
+# Debug symbols
+*.dSYM/
+
+# OS generated files
+.DS_Store
